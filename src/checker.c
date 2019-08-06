@@ -6,79 +6,73 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 13:05:21 by fsinged           #+#    #+#             */
-/*   Updated: 2019/08/06 15:28:08 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/08/06 16:07:36 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	check_word(char *str)
+static int	check_word(char *line, t_ar *ar)
 {
 	if (ft_strcmp(line, "sa") == 0)
-		swap(a, sizea);
+		swap(ar->a, ar->sizea);
 	else if (ft_strcmp(line, "sb") == 0)
-		swap(b, sizeb);
+		swap(ar->b, ar->sizeb);
 	else if (ft_strcmp(line, "ss") == 0)
-		swap_ab(a, b, sizea, sizeb);
+		swap_ab(ar);
 	else if (ft_strcmp(line, "pa") == 0)
-		push(a, b, &sizea, &sizeb);
+		push(ar->a, ar->b, &(ar->sizea), &(ar->sizeb));
 	else if (ft_strcmp(line, "pb") == 0)
-		push(b, a, &sizeb, &sizea);
+		push(ar->b, ar->a, &(ar->sizeb), &(ar->sizea));
 	else if (ft_strcmp(line, "ra") == 0)
-		rotate(a, sizea);
+		rotate(ar->a, ar->sizea);
 	else if (ft_strcmp(line, "rb") == 0)
-		rotate(b, sizeb);
+		rotate(ar->b, ar->sizeb);
 	else if (ft_strcmp(line, "rr") == 0)
-		rotate_ab(a, b, sizea, sizeb);
+		rotate_ab(ar);
 	else if (ft_strcmp(line, "rra") == 0)
-		rrotate(a, sizea);
+		rrotate(ar->a, ar->sizea);
 	else if (ft_strcmp(line, "rrb") == 0)
-		rrotate(b, sizeb);
+		rrotate(ar->b, ar->sizeb);
 	else if (ft_strcmp(line, "rrr") == 0)
-		rrotate_ab(a, b, sizea, sizeb);
+		rrotate_ab(ar);
 	else
 		return (0);
 	return (1);
 }
 
-static int	checker(int *a, int sizea)
+static int	checker(t_ar *ar)
 {
-	int		*b;
-	int		sizeb;
 	int		fd;
 	char	*line;
 
-	b = (int*)malloc(sizeof(int) * sizea);
-	sizeb = 0;
 	fd = 0;
 	while (get_next_line(fd, &line))
 	{
-		if (check_word(line) == 0)
+		if (check_word(line, ar) == 0)
 			break ;
 		ft_strdel(&line);
 	}
-	ft_strdel(&line);
-	free(b);
-	b = NULL;
-	return (issorted(a, sizea));
+	return (issorted(ar->a, ar->sizea));
 }
 
 int			main(int argc, char **argv)
 {
-	int *a;
+	t_ar	*ar;
 
-	a = (int*)malloc(sizeof(int) * (argc - 1));
-	if (readnumbers(argc, argv, a) != 0)
+	if (argc == 1)
+		return (0);
+	ar = init_ar(argc - 1);
+	if (readnumbers(argc - 1, argv + 1, ar->a) != 0)
 	{
-		if (checker(a, argc - 1) == 0)
+		if (checker(ar) == 0)
 			write(1, "KO\n", 3);
 		else
 			write(1, "OK\n", 3);
 	}
 	else
 		write(1, "Error\n", 6);
-	print(a, argc - 1);
-	free(a);
-	a = NULL;
+	print(ar->a, ar->sizea);
+	free_struct(&ar);
 	return (0);
 }

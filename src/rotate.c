@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 11:39:48 by fsinged           #+#    #+#             */
-/*   Updated: 2019/08/06 13:49:01 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/08/06 16:00:58 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ void	rotate(int *ar, int size)
 	}
 }
 
-void	rotate_ab(int *a, int *b, int sizea, int sizeb)
+void	rotate_ab(t_ar *ar)
 {
-	rotate(a, sizea);
-	rotate(b, sizeb);
+	rotate(ar->a, ar->sizea);
+	rotate(ar->b, ar->sizeb);
 }
 
 void	rrotate(int *ar, int size)
@@ -60,8 +60,8 @@ void	rrotate(int *ar, int size)
 	}
 }
 
-void	rrotate_ab(int *a, int *b, int sizea, int sizeb)
+void	rrotate_ab(t_ar *ar)
 {
-	rrotate(a, sizea);
-	rrotate(b, sizeb);
+	rrotate(ar->a, ar->sizea);
+	rrotate(ar->b, ar->sizeb);
 }

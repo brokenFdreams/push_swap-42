@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 15:24:38 by fsinged           #+#    #+#             */
-/*   Updated: 2019/08/06 15:37:54 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/08/06 16:08:22 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,41 @@ int			readnumbers(int argc, char **argv, int *a)
 {
 	int	i;
 
-	i = 1;
+	i = 0;
 	while (i < argc)
 	{
 		if (!isdigits(argv[i]))
 			return (0);
-		a[i - 1] = ft_atoi(argv[i]);
+		a[i] = ft_atoi(argv[i]);
 		i++;
 	}
 	return (1);
+}
+
+/*
+** Free struct
+*/
+
+void		free_struct(t_ar **ar)
+{
+	free((*ar)->a);
+	free((*ar)->b);
+	free(*ar);
+	ar = NULL;
+}
+
+/*
+** Initialization of struct t_ar
+*/
+
+t_ar		*init_ar(int size)
+{
+	t_ar	*ar;
+
+	ar = (t_ar*)malloc(sizeof(t_ar));
+	ar->sizea = size;
+	ar->a = (int*)malloc(sizeof(int) * size);
+	ar->sizeb = 0;
+	ar->b = (int*)malloc(sizeof(int) * size);
+	return (ar);
 }

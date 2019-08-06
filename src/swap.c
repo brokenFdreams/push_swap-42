@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 11:29:00 by fsinged           #+#    #+#             */
-/*   Updated: 2019/08/06 13:45:42 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/08/06 16:07:05 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	swap(int *ar, int size)
 	}
 }
 
-void	swap_ab(int *a, int *b, int sizea, int sizeb)
+void	swap_ab(t_ar *ar)
 {
-	swap(a, sizea);
-	swap(b, sizeb);
+	swap(ar->a, ar->sizea);
+	swap(ar->b, ar->sizeb);
 }
