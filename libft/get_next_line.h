@@ -1,42 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/06 11:33:59 by fsinged           #+#    #+#             */
-/*   Updated: 2019/08/06 14:24:28 by fsinged          ###   ########.fr       */
+/*   Created: 2019/04/17 11:16:02 by fsinged           #+#    #+#             */
+/*   Updated: 2019/07/19 14:01:11 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-void	push(int *a, int *b, int *size, int *sizeb)
-{
-	int tmp;
-	int i;
+# include "libft.h"
+# include <stdlib.h>
+# include <unistd.h>
 
-	if (*sizeb > 0)
-	{
-		tmp = a[0];
-		a[0] = b[0];
-		i = 1;
-		while (i < *size)
-		{
-			b[0] = a[i];
-			a[i] = tmp;
-			tmp = b[0];
-			i++;
-		}
-		a[i] = tmp;
-		(*size)++;
-		(*sizeb)--;
-		i = 0;
-		while (i < *sizeb)
-		{
-			b[i] = b[i + 1];
-			i++;
-		}
-	}
-}
+# define BUFF_SIZE 42
+
+int					get_next_line(const int fd, char **line);
+
+#endif

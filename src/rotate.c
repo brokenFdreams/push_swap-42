@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 11:39:48 by fsinged           #+#    #+#             */
-/*   Updated: 2019/08/06 12:03:08 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/08/06 13:49:01 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,18 @@ void	rotate(int *ar, int size)
 	int b;
 	int i;
 
-	b = ar[size - 1];
-	ar[size - 1] = ar[0];
-	i = size - 2;
-	while (i >= 0)
+	if (size > 1)
 	{
-		tmp = ar[i];
-		ar[i] = b;
-		b = tmp;
-		i--;
+		b = ar[size - 1];
+		ar[size - 1] = ar[0];
+		i = size - 2;
+		while (i >= 0)
+		{
+			tmp = ar[i];
+			ar[i] = b;
+			b = tmp;
+			i--;
+		}
 	}
 }
 
@@ -42,15 +45,18 @@ void	rrotate(int *ar, int size)
 	int b;
 	int i;
 
-	b = ar[0];
-	ar[0] = ar[size - 1];
-	i = 1;
-	while (i < size)
+	if (size > 1)
 	{
-		tmp = ar[i];
-		ar[i] = b;
-		b = tmp;
-		i++;
+		b = ar[0];
+		ar[0] = ar[size - 1];
+		i = 1;
+		while (i < size)
+		{
+			tmp = ar[i];
+			ar[i] = b;
+			b = tmp;
+			i++;
+		}
 	}
 }
 
