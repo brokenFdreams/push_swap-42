@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/06 11:47:15 by fsinged           #+#    #+#             */
-/*   Updated: 2019/08/06 12:02:19 by fsinged          ###   ########.fr       */
+/*   Created: 2019/08/06 15:21:00 by fsinged           #+#    #+#             */
+/*   Updated: 2019/08/06 15:24:05 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "push_swap.h"
 
-# include "../libft/libft.h"
-# include <stdio.h>
-# include <stdlib.h>
+static void	push_swap(int *a, int size)
+{
+	
+}
 
-void	swap(int *ar);
-void	swap_ab(int *a, int *b);
-void	push(int *a, int *b, int size);
-void	rotate(int *ar, int size);
-void	rotate_ab(int *a, int *b, int sizea, int sizeb);
-void	rrotate(int *ar, int size);
-void	rrotate_ab(int *a, int *b, int sizea, int sizeb);
+int			main(int argc, char **argv)
+{
+	int *a;
 
-#endif
+	a = (int*)malloc(sizeof(int) * (argc - 1));
+	if (readnumbers(argc, argv, a) != 0)
+		push_swap(a, argc - 1);
+	else
+		write(1, "Error\n", 6);
+	print(a, argc - 1);
+	free(a);
+	a = NULL;
+	return (0);
+}
