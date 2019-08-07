@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 15:21:00 by fsinged           #+#    #+#             */
-/*   Updated: 2019/08/07 12:10:16 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/08/07 12:36:43 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ static int	sort_ab(t_ar *ar)
 		write(1, "ss\n", 3);
 		count++;
 	}
-	if (ar->a[0] > ar->a[ar->sizea - 1] && ar->b[0] < ar->b[ar->sizeb - 1])
+	if ((ar->a[0] > ar->a[ar->sizea - 1] || (ar->a[0] < ar->a[ar->sizea - 1] &&
+		ar->a[ar->sizea - 1] < ar->a[ar->sizea - 2])) &&
+		(ar->b[0] < ar->b[ar->sizeb - 1] || (ar->b[0] > ar->b[ar->sizeb - 1] &&
+		ar->b[ar->sizeb - 1] < ar->b[ar->sizeb - 2])))
 	{
 		if (ar->a[0] > ar->a[1] && ar->b[0] < ar->b[1])
 		{
@@ -74,13 +77,14 @@ static int	sort_a(int *ar, int size)
 	int count;
 
 	count = 0;
-	if (ar[0] > ar[1])
+	if (ar[0] > ar[1] && ar[0] < ar[size - 1])
 	{
 		swap(ar, size);
 		write(1, "sa\n", 3);
 		count++;
 	}
-	if (ar[0] > ar[size - 1])
+	if (ar[0] > ar[size - 1] ||
+		(ar[0] < ar[size - 1] && ar[size - 1] < ar[size - 2]))
 	{
 		if (ar[0] > ar[1])
 		{

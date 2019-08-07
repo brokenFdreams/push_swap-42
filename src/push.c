@@ -6,13 +6,13 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 11:33:59 by fsinged           #+#    #+#             */
-/*   Updated: 2019/08/07 11:44:55 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/08/07 13:05:07 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	push(int *a, int *b, int *size, int *sizeb)
+void	push(int *a, int *b, int *size, int *sizeb)
 {
 	int tmp;
 	int i;
@@ -41,16 +41,16 @@ static void	push(int *a, int *b, int *size, int *sizeb)
 	}
 }
 
-void		push_ab(t_ar *ar, char c)
+void	push_ab(t_ar *ar, char c)
 {
 	if (c == 'a')
 	{
-		push(ar->a, ar->b, &(ar->sizea), &(ar->sizeb));
+		push(ar->b, ar->a, &(ar->sizeb), &(ar->sizea));
 		write(1, "pa\n", 3);
 	}
 	else
 	{
-		push(ar->b, ar->a, &(ar->sizeb), &(ar->sizeb));
+		push(ar->a, ar->b, &(ar->sizea), &(ar->sizeb));
 		write(1, "pb\n", 3);
 	}
 }

@@ -6,14 +6,13 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 11:47:15 by fsinged           #+#    #+#             */
-/*   Updated: 2019/08/07 11:47:12 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/08/07 13:05:59 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-//# include "../libft/libft.h"
 # include "libft.h"
 # include <stdio.h>
 # include <stdlib.h>
@@ -33,6 +32,7 @@ typedef struct	s_ar
 
 void	swap(int *ar, int size);
 void	swap_ab(t_ar *ar);
+void	push(int *a, int *b, int *size, int *sizeb);
 void	push_ab(t_ar *ar, char c);
 void	rotate(int *ar, int size);
 void	rotate_ab(t_ar *ar);
