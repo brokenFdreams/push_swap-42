@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 13:05:21 by fsinged           #+#    #+#             */
-/*   Updated: 2019/08/07 13:03:36 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/08/07 13:59:38 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ int			main(int argc, char **argv)
 	}
 	else
 		write(1, "Error\n", 6);
-	print(ar->a, ar->sizea);
 	free_struct(&ar);
 	return (0);
 }
