@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 15:24:38 by fsinged           #+#    #+#             */
-/*   Updated: 2019/08/06 16:08:22 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/08/07 11:40:17 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,25 @@ void		print(int *a, int size)
 ** Check, sorted array or not
 */
 
-int			issorted(int *a, int size)
+int			issorted(int *a, int size, char c)
 {
 	int i;
 
 	i = 0;
-	while (i < size - 1)
-	{
-		if (a[i] > a[i + 1])
-			return (0);
-		i++;
-	}
+	if (c == 'a')
+		while (i < size - 1)
+		{
+			if (a[i] > a[i + 1])
+				return (0);
+			i++;
+		}
+	else
+		while (i < size - 1)
+		{
+			if (a[i] < a[i + 1])
+				return (0);
+			i++;
+		}
 	return (1);
 }
 
