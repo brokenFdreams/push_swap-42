@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 15:24:38 by fsinged           #+#    #+#             */
-/*   Updated: 2019/08/07 13:58:45 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/08/12 15:52:07 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ static int	isdigits(char *str)
 int			readnumbers(int argc, char **argv, int *a)
 {
 	int	i;
+	int j;
 
 	i = 0;
 	while (i < argc)
@@ -85,6 +86,13 @@ int			readnumbers(int argc, char **argv, int *a)
 		if (!isdigits(argv[i]))
 			return (0);
 		a[i] = ft_atoi(argv[i]);
+		j = 0;
+		while (j < i)
+		{
+			if (a[j] == a[i])
+				return (0);
+			j++;
+		}
 		i++;
 	}
 	return (1);

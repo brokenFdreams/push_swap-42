@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 13:05:21 by fsinged           #+#    #+#             */
-/*   Updated: 2019/08/07 13:59:38 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/08/12 15:49:49 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	checker(t_ar *ar)
 			break ;
 		ft_strdel(&line);
 	}
-	return (issorted(ar->a, ar->sizea, 'a'));
+	return (issorted(ar->a, ar->sizea, 'a') && ar->sizeb == 0);
 }
 
 int			main(int argc, char **argv)
