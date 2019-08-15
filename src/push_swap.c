@@ -1,136 +1,93 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   pushswap.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/06 15:21:00 by fsinged           #+#    #+#             */
-/*   Updated: 2019/08/12 15:48:19 by fsinged          ###   ########.fr       */
+/*   Created: 2019/08/15 12:39:07 by fsinged           #+#    #+#             */
+/*   Updated: 2019/08/15 14:31:39 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/*
-** Sort both statcks
-*/
-
-static int	sort_ab(t_ar *ar)
+int			findindexmax(int *b, int size, int max)
 {
-	int count;
+	int i;
 
-	count = 0;
-	if (ar->a[0] > ar->a[1] && ar->b[0] < ar->b[1])
+	i = 0;
+	while (i < size)
 	{
-		swap_ab(ar);
-		write(1, "ss\n", 3);
-		count++;
+		if (b[i] == max)
+			return (i);
+		i++;
 	}
-	if (ar->a[0] > ar->a[ar->sizea - 1] && ar->b[0] < ar->b[ar->sizeb - 1])
-	{
-		if (ar->a[ar->sizea - 1] < ar->a[ar->sizea - 2] &&
-			ar->b[ar->sizeb - 1] > ar->b[ar->sizeb - 2])
-		{
-			rrotate_ab(ar);
-			write(1, "rrr\n", 4);
-			count++;
-		}
-		else if (ar->a[ar->sizea - 1] > ar->a[ar->sizea - 2] &&
-				ar->b[ar->sizeb - 1] < ar->b[ar->sizeb - 2])
-		{
-			rotate_ab(ar);
-			write(1, "rr\n", 3);
-			count++;
-		}
-	}
-	return (count);
+	return (-1);
 }
 
 /*
-** Sort stack b
+** looking for new max
 */
 
-static int	sort_b(int *ar, int size)
+int			findnewmax(t_ar *ar)
 {
-	int count;
+	int i;
+	int max;
 
-	count = 0;
-	if (ar[0] < ar[1])
+	i = 2;
+	max = ar->b[1];
+	while (i < ar->sizeb)
 	{
-		swap(ar, size);
-		write(1, "sb\n", 3);
-		count++;
+		if (max < ar->b[i] && ar->b[i] < ar->max[4])
+			max = ar->b[i];
+		i++;
 	}
-	if (ar[0] < ar[size - 1])
-	{
-		if (ar[size - 1] > ar[size - 2])
-		{
-			rrotate(ar, size);
-			write(1, "rrb\n", 4);
-		}
-		else
-		{
-			rotate(ar, size);
-			write(1, "rb\n", 3);
-		}
-		count++;
-	}
-	return (count);
+	return (max);
 }
 
-/*
-** Sort stack a
-*/
-
-static int	sort_a(int *ar, int size)
+static void maxs_help(t_ar *ar, int count, int max)
 {
-	int count;
+	int i;
 
-	count = 0;
-	if (ar[0] > ar[1])
+	i = ar->sizemax;
+	while (count < i)
 	{
-		swap(ar, size);
-		write(1, "sa\n", 3);
-		count++;
+		ar->max[i] = ar->max[i - 1];
+		i--;
 	}
-	if (ar[0] > ar[size - 1])
+	ar->max[count] = max;
+}
+
+static void	maxs(t_ar *ar)
+{
+	int	i;
+
+	i = 0;
+	while (i < ar->sizea)
 	{
-		if (ar[size - 1] < ar[size - 2])
-		{
-			rrotate(ar, size);
-			write(1, "rra\n", 4);
-		}
-		else
-		{
-			rotate(ar, size);
-			write(1, "ra\n", 3);
-		}
-		count++;
+		if (ar->max[0] < ar->a[i])
+			maxs_help(ar, 0, ar->a[i]);
+		else if (ar->max[1] < ar->a[i])
+			maxs_help(ar, 1, ar->a[i]);
+		else if (ar->max[2] < ar->a[i])
+			maxs_help(ar, 2, ar->a[i]);
+		else if (ar->max[3] < ar->a[i])
+			maxs_help(ar, 3, ar->a[i]);
+		else if (ar->max[4] < ar->a[i])
+			maxs_help(ar, 4, ar->a[i]);
+		else if (ar->max[5] < ar->a[i])
+			maxs_help(ar, 5, ar->a[i]);
+		i++;
 	}
-	return (count);
 }
 
 static void	push_swap(t_ar *ar)
 {
 	if (ar->sizea > 1)
 	{
-		while (!(ar->sizeb == 0 && issorted(ar->a, ar->sizea, 'a')))
-		{
-			if (ar->sizeb > 1 && ar->sizea > 1)
-				while (sort_ab(ar))
-					;
-			if (ar->sizeb > 1)
-				while (sort_b(ar->b, ar->sizeb))
-					;
-			if (ar->sizea > 1)
-				while (sort_a(ar->a, ar->sizea))
-					;
-			if (issorted(ar->a, ar->sizea, 'a') && ar->sizeb > 0)
-				push_ab(ar, 'a');
-			else if (!(issorted(ar->a, ar->sizea, 'a')))
-				push_ab(ar, 'b');
-		}
+		maxs(ar);
+		sort(ar);
 	}
 }
 

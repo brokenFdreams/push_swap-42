@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 13:05:21 by fsinged           #+#    #+#             */
-/*   Updated: 2019/08/12 15:49:49 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/08/15 14:36:03 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,27 @@
 static int	check_word(char *line, t_ar *ar)
 {
 	if (ft_strcmp(line, "sa") == 0)
-		swap(ar->a, ar->sizea);
+		swap(ar->a, ar->sizea, 0);
 	else if (ft_strcmp(line, "sb") == 0)
-		swap(ar->b, ar->sizeb);
+		swap(ar->b, ar->sizeb, 0);
 	else if (ft_strcmp(line, "ss") == 0)
-		swap_ab(ar);
+		swap_ab(ar, 0);
 	else if (ft_strcmp(line, "pa") == 0)
 		push(ar->a, ar->b, &(ar->sizea), &(ar->sizeb));
 	else if (ft_strcmp(line, "pb") == 0)
 		push(ar->b, ar->a, &(ar->sizeb), &(ar->sizea));
 	else if (ft_strcmp(line, "ra") == 0)
-		rotate(ar->a, ar->sizea);
+		rotate(ar->a, ar->sizea, 0);
 	else if (ft_strcmp(line, "rb") == 0)
-		rotate(ar->b, ar->sizeb);
+		rotate(ar->b, ar->sizeb, 0);
 	else if (ft_strcmp(line, "rr") == 0)
-		rotate_ab(ar);
+		rotate_ab(ar, 0);
 	else if (ft_strcmp(line, "rra") == 0)
-		rrotate(ar->a, ar->sizea);
+		rrotate(ar->a, ar->sizea, 0);
 	else if (ft_strcmp(line, "rrb") == 0)
-		rrotate(ar->b, ar->sizeb);
+		rrotate(ar->b, ar->sizeb, 0);
 	else if (ft_strcmp(line, "rrr") == 0)
-		rrotate_ab(ar);
+		rrotate_ab(ar, 0);
 	else
 		return (0);
 	return (1);

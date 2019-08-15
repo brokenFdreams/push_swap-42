@@ -6,18 +6,22 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 11:39:48 by fsinged           #+#    #+#             */
-/*   Updated: 2019/08/06 16:00:58 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/08/15 13:37:37 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rotate(int *ar, int size)
+void	rotate(int *ar, int size, int h)
 {
 	int tmp;
 	int b;
 	int i;
 
+	if (h == 1)
+		write(1, "ra\n", 3);
+	else if (h == 2)
+		write(1, "rb\n", 3);
 	if (size > 1)
 	{
 		b = ar[size - 1];
@@ -33,18 +37,24 @@ void	rotate(int *ar, int size)
 	}
 }
 
-void	rotate_ab(t_ar *ar)
+void	rotate_ab(t_ar *ar, int h)
 {
-	rotate(ar->a, ar->sizea);
-	rotate(ar->b, ar->sizeb);
+	if (h == 1)
+		write(1, "rr\n",3);
+	rotate(ar->a, ar->sizea, 0);
+	rotate(ar->b, ar->sizeb, 0);
 }
 
-void	rrotate(int *ar, int size)
+void	rrotate(int *ar, int size, int h)
 {
 	int tmp;
 	int b;
 	int i;
 
+	if (h == 1)
+		write(1, "rra\n", 4);
+	else if (h == 2)
+		write(1, "rrb\n", 4);
 	if (size > 1)
 	{
 		b = ar[0];
@@ -60,8 +70,10 @@ void	rrotate(int *ar, int size)
 	}
 }
 
-void	rrotate_ab(t_ar *ar)
+void	rrotate_ab(t_ar *ar, int h)
 {
-	rrotate(ar->a, ar->sizea);
-	rrotate(ar->b, ar->sizeb);
+	if (h == 1)
+		write(1, "rrr\n", 4);
+	rrotate(ar->a, ar->sizea, 0);
+	rrotate(ar->b, ar->sizeb, 0);
 }

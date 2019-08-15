@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 15:24:38 by fsinged           #+#    #+#             */
-/*   Updated: 2019/08/12 15:52:07 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/08/15 14:31:28 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void		free_struct(t_ar **ar)
 {
 	free((*ar)->a);
 	free((*ar)->b);
+	free((*ar)->max);
 	free(*ar);
 	ar = NULL;
 }
@@ -123,5 +124,7 @@ t_ar		*init_ar(int size)
 	ar->a = (int*)malloc(sizeof(int) * size);
 	ar->sizeb = 0;
 	ar->b = (int*)malloc(sizeof(int) * size);
+	ar->max = (int*)malloc(sizeof(int) * (size < 6 ? size : 6));
+	ar->sizemax = size < 6 ? size : 6;
 	return (ar);
 }
