@@ -36,7 +36,7 @@ int			findnewmax(t_ar *ar)
 	int max;
 
 	i = 2;
-	max = ar->b[1];
+	max = ar->b[1] < max[4] ? ar->b[1] : ar->b[2]; // if it is max[4] or something? FIX THERE
 	while (i < ar->sizeb)
 	{
 		if (max < ar->b[i] && ar->b[i] < ar->max[4])
