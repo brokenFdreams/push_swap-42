@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 11:40:51 by fsinged           #+#    #+#             */
-/*   Updated: 2019/08/16 12:09:32 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/08/16 15:44:35 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,12 @@ static void	push_a(t_ar *ar)
 			sort_b(ar);
 			sort_a(ar->a, ar->sizea);
 			if (ar->sizeb > 0)
-				ar->max[3] = ar->max[4];
+				ar->max[3] = ar->max[4] == ar->max[3] ? ar->max[5] : ar->max[4];
 			if (ar->sizeb > 1)
+			{
 				ar->max[4] = ar->max[5];
+				ar->max[4] = ar->max[4] == ar->max[3] ? findnewmax(ar) : ar->max[4];
+			}
 			if (ar->sizeb > 2)
 				ar->max[5] = findnewmax(ar);
 		}
@@ -86,8 +89,11 @@ static void	push_a(t_ar *ar)
 			if (i != -1 && i < ar->sizeb / 2)
 				while (i > 0)
 				{
-					if (ar->b[0] == ar->max[4])
-						swap(ar->b, ar->sizeb, 2);
+					if (ar->b[0] == ar->max[4] && ar->max[4] < ar->max[3])
+					{
+						push_ab(ar, 'a');
+						ar->max[4] = ar->max[3];
+					}
 					if (ar->b[0] != ar->max[3])
 						rotate(ar->b, ar->sizeb, 2);
 					i--;
@@ -95,9 +101,12 @@ static void	push_a(t_ar *ar)
 			else if (i != -1)
 				while (ar->b[0] != ar->max[3])
 				{
+					if (ar->b[0] == ar->max[4] && ar->max[4] < ar->max[3])
+					{
+						push_ab(ar, 'a');
+						ar->max[4] = ar->max[3];
+					}
 					rrotate(ar->b, ar->sizeb, 2);
-					if (ar->b[1] == ar->max[4] && ar->b[0] != ar->max[3])
-						swap(ar->b, ar->sizeb, 2);
 				}
 		}
 	}
