@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 12:39:07 by fsinged           #+#    #+#             */
-/*   Updated: 2019/08/15 14:31:39 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/08/16 10:59:03 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ int			findnewmax(t_ar *ar)
 	int i;
 	int max;
 
-	i = 2;
-	max = ar->b[1] < max[4] ? ar->b[1] : ar->b[2]; // if it is max[4] or something? FIX THERE
+	i = 0;
+	while ((max = ar->b[i]) >= ar->max[4])
+		i++;
 	while (i < ar->sizeb)
 	{
 		if (max < ar->b[i] && ar->b[i] < ar->max[4])

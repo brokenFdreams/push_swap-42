@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 11:40:51 by fsinged           #+#    #+#             */
-/*   Updated: 2019/08/15 16:35:40 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/08/16 11:46:45 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static void	sort_b(t_ar *ar)
 {
 	if (ar->b[0] == ar->max[3] || issorted(ar->b, ar->sizeb, 'b'))
 		return ;
-	if (ar->b[0] < ar->b[1] && ar->b[0] < ar->b[ar->sizeb - 1] &&
-		ar->b[0] < ar->b[2])
+	if ((ar->b[0] < ar->b[1] && ar->b[0] < ar->b[ar->sizeb - 1] &&
+		 ar->b[0] < ar->b[2]) || ar->b[0] < (ar->max[4] - ar->sizeb / 10))
 	{
 		if (ar->a[0] > ar->a[1] && ar->a[0] > ar->a[2]
 			&& ar->a[0] > ar->a[ar->sizea - 1])
@@ -109,7 +109,7 @@ static void	push_a(t_ar *ar)
 
 static void	push_b(t_ar *ar)
 {
-	while (ar->sizea > 3 && !(issorted(ar->a, ar->sizea, 'a')))
+	while (ar->sizea > 3)
 	{
 		if (ar->a[0] < ar->max[2])
 		{
