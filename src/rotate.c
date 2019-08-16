@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 11:39:48 by fsinged           #+#    #+#             */
-/*   Updated: 2019/08/16 11:47:42 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/08/16 12:05:47 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	rotate(int *ar, int size, int h)
 void	rotate_ab(t_ar *ar, int h)
 {
 	if (h == 1)
-		write(1, "rr\n",3);
+		write(1, "rr\n", 3);
 	rotate(ar->a, ar->sizea, 0);
 	rotate(ar->b, ar->sizeb, 0);
 }
