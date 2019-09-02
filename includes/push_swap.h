@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 11:47:15 by fsinged           #+#    #+#             */
-/*   Updated: 2019/08/15 16:34:00 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/02 13:44:33 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,7 @@ void	print(int *a, int size);
 int		findindexmax(int *b, int size, int max);
 int		findnewmax(t_ar *ar);
 void	sort(t_ar *ar);
+
+void	push_a(t_ar *ar);
 
 #endif

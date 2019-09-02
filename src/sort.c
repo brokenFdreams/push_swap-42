@@ -6,13 +6,13 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 11:40:51 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/02 11:44:51 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/02 13:44:58 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	sort_b(t_ar *ar)
+/*static*/ void	sort_b(t_ar *ar)
 {
 	if (ar->b[0] == ar->max[3] || issorted(ar->b, ar->sizeb, 'b'))
 		return ;
@@ -45,7 +45,7 @@ static void	sort_b(t_ar *ar)
 ** Sort stack a
 */
 
-static void	sort_a(int *a, int size)
+/*static*/ void	sort_a(int *a, int size)
 {
 	while (!(issorted(a, size, 'a')))
 	{
@@ -61,7 +61,7 @@ static void	sort_a(int *a, int size)
 /*
 ** Push all numbers from stack b back to stack a
 */
-
+/*
 static void	push_a(t_ar *ar)
 {
 	int i;
@@ -106,12 +106,17 @@ static void	push_a(t_ar *ar)
 						push_ab(ar, 'a');
 						ar->max[4] = ar->max[3];
 					}
+					if (ar->b[0] == ar->max[2] && ar->max[5] < ar->max[3])
+					{
+						push_ab(ar, 'a');
+						ar->max[5] = ar->max[3];
+					}
 					rrotate(ar->b, ar->sizeb, 2);
 				}
 		}
 	}
 }
-
+*/
 /*
 ** IN FUNCTION UPPER
 ** TRY TO PUSH MAX[5] TO STACK a, WHILE YOU SEARCH MAX[3] THEN,
@@ -143,6 +148,7 @@ void		sort(t_ar *ar)
 	{
 		push_b(ar);
 		sort_a(ar->a, ar->sizea);
+		ar->max[2] = ar->max[5];
 		push_a(ar);
 		if (ar->a[0] > ar->a[1])
 			swap(ar->a, ar->sizea, 1);
