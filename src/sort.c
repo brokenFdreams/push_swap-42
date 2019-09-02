@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 11:40:51 by fsinged           #+#    #+#             */
-/*   Updated: 2019/08/16 16:06:09 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/02 11:44:51 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,8 @@ static void	push_a(t_ar *ar)
 
 /*
 ** IN FUNCTION UPPER
-** TRY TO PUSH MAX[5] TO STACK a, WHILE YOU SEARCH MAX[3]
-** THEN, IF YOU ALSO PUSH MAX[4], JUST PUSH BACK MAX[5] AND PUSH MAX[3] TO STACK a
+** TRY TO PUSH MAX[5] TO STACK a, WHILE YOU SEARCH MAX[3] THEN,
+** IF YOU ALSO PUSH MAX[4], JUST PUSH BACK MAX[5] AND PUSH MAX[3] TO STACK a
 ** PROFIT :)))
 */
 
