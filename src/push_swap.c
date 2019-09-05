@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 12:16:08 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/05 13:52:33 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/05 15:38:48 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	push_swap(t_ar *ar)
 		big_sort(ar, get_avg(ar->a, ar->sizea));
 }
 
-int 		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	t_ar	*ar;
 
