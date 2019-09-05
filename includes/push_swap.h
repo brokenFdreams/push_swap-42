@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 11:47:15 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/05 12:14:48 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/05 13:51:04 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ typedef struct	s_ar
 	int			*b;
 	int			sizea;
 	int			sizeb;
-	int			*max;
-	int			sizemax;
 }				t_ar;
 
 /*
@@ -50,12 +48,17 @@ int		readnumbers(int argc, char **argv, int *a);
 void	free_struct(t_ar **ar);
 t_ar	*init_ar(int size);
 
+void	small_sort(int *a, int size);
+void	sort(t_ar *ar);
+void	big_sort(t_ar *ar, int avg);
+
 /*
 ** help.c
 */
 
 int		get_avg(int *a, int size);
-int		get_indexmin(int *b, int size, int max);
+int		get_min(int *b, int size);
+int		*get_maxs(int *ar, int size, int *max);
 
 void	print(int *a, int size);
 

@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 12:16:08 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/05 12:25:36 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/05 13:52:33 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 ** Sort for 3 elements
 */
 
-static void	small_sort(int *a, int size)
+void		small_sort(int *a, int size)
 {
 	if (size == 2 && a[0] > a[1])
-		swap(a, size, 1)
+		swap(a, size, 1);
 	while (!(issorted(a, size, 'a')))
 	{
 		if (a[0] > a[1] && a[0] > a[2])
@@ -31,35 +31,16 @@ static void	small_sort(int *a, int size)
 	}
 }
 
-/*
-** Sort for less elements, then 10 and more then 3
-*/
-
-static void	sort(t_ar *ar)
-{
-
-}
-
-/*
-** Sort for more elements, then 10
-*/
-
-static void	big_sort(t_ar *ar, int avg)
-{
-	
-}
-
 static void	push_swap(t_ar *ar)
 {
+	if (issorted(ar->a, ar->sizea, 'a'))
+		return ;
 	if (ar->sizea < 3)
 		small_sort(ar->a, ar->sizea);
 	else if (ar->sizea < 10)
 		sort(ar);
 	else
-	{
-		
 		big_sort(ar, get_avg(ar->a, ar->sizea));
-	}
 }
 
 int 		main(int argc, char **argv)

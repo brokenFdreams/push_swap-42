@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 11:36:41 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/05 12:17:10 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/05 13:46:52 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ int	get_avg(int *a, int size)
 	double count;
 	int i;
 
+	i = 0;
 	count = 0;
 	while (i < size)
-		count += a[i];
+		count += a[i++];
 	return ((int)(count / size + 0.5));
 }
 
@@ -37,6 +38,29 @@ int	get_min(int *b, int size)
 
 	index = 0;
 	while (--size > 0)
-		index = ar->b[size] < ar->b[index] ? size : index;
+		index = b[size] < b[index] ? size : index;
 	return (index);
+}
+
+/*
+** Get 3 maximum element
+*/
+
+int *get_maxs(int *ar, int size, int *max)
+{
+	int i;
+
+	i = 1;
+	max[0] = ar[0];
+	while (i < size)
+	{
+		if (max[0] < ar[i])
+		{
+			max[2] = max[1];
+			max[1] = max[0];
+			max[0] = ar[i];
+		}
+		i++;
+	}
+	return (max);
 }

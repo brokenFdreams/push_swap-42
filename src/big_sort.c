@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 12:18:02 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/05 13:05:49 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/05 13:48:40 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static int	count_avg(int *a, int size, int avg, int flag)
 
 	count = 0;
 	while (--size >= 0)
-		if (flag && a[i] <= avg)
+		if (flag && a[size] <= avg)
 			count++;
-		else if (!flag && a[i] > avg)
+		else if (!flag && a[size] > avg)
 			count++;
 	return (count);
 }
@@ -40,7 +40,7 @@ static void	join_smart(t_ar *ar)
 	int count = ar->sizeb;
 	while (ar->sizeb > 0)
 		push_ab(ar, 'a');
-	while (!(issorted(ar->a, ar->sizea, 'a') && count > 0)
+	while (!(issorted(ar->a, ar->sizea, 'a')) && count > 0)
 	{
 		rotate(ar->a, ar->sizea, 1);
 		count--;
