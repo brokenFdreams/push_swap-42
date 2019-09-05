@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 11:36:41 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/05 13:46:52 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/05 14:30:43 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int *get_maxs(int *ar, int size, int *max)
 
 	i = 1;
 	max[0] = ar[0];
+	max[1] = ar[get_min(ar, size)];
+	max[2] = max[1];
 	while (i < size)
 	{
 		if (max[0] < ar[i])
@@ -60,6 +62,13 @@ int *get_maxs(int *ar, int size, int *max)
 			max[1] = max[0];
 			max[0] = ar[i];
 		}
+		else if (max[1] < ar[i])
+		{
+			max[2] = max[1];
+			max[1] = ar[i];
+		}
+		else if (max[2] < ar[i])
+			max[2] = ar[i];
 		i++;
 	}
 	return (max);

@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 13:09:15 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/05 13:45:59 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/05 14:31:12 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	push_b(t_ar *ar, int *max)
 		if (ar->a[0] < max[2])
 			push_ab(ar, 'b');
 		else
-			rotate(ar->a, ar->sizea, 'a');
+			rotate(ar->a, ar->sizea, 1);
 	}
 }
 
