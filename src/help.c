@@ -5,44 +5,38 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/16 12:06:38 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/02 11:46:10 by fsinged          ###   ########.fr       */
+/*   Created: 2019/09/05 11:36:41 by fsinged           #+#    #+#             */
+/*   Updated: 2019/09/05 12:17:10 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	findindexmax(int *b, int size, int max)
+/*
+** Get average element
+*/
+
+int	get_avg(int *a, int size)
 {
+	double count;
 	int i;
 
-	i = 0;
+	count = 0;
 	while (i < size)
-	{
-		if (b[i] == max)
-			return (i);
-		i++;
-	}
-	return (-1);
+		count += a[i];
+	return ((int)(count / size + 0.5));
 }
 
 /*
-** looking for new max
+** Finding index of minumun element
 */
 
-int	findnewmax(t_ar *ar)
+int	get_min(int *b, int size)
 {
-	int i;
-	int max;
+	int index;
 
-	i = 0;
-	while ((max = ar->b[i]) >= ar->max[4])
-		i++;
-	while (i < ar->sizeb)
-	{
-		if (max < ar->b[i] && ar->b[i] < ar->max[4])
-			max = ar->b[i];
-		i++;
-	}
-	return (max);
+	index = 0;
+	while (--size > 0)
+		index = ar->b[size] < ar->b[index] ? size : index;
+	return (index);
 }

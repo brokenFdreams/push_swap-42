@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 11:47:15 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/03 12:48:20 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/05 12:14:48 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,21 @@ void	rrotate(int *ar, int size, int h);
 void	rrotate_ab(t_ar *ar, int h);
 
 /*
-** Help functions
+** functions.c
 */
 
 int		issorted(int *a, int size, char c);
 int		readnumbers(int argc, char **argv, int *a);
 void	free_struct(t_ar **ar);
 t_ar	*init_ar(int size);
-void	print(int *a, int size);
-int		findindexmax(int *b, int size, int max);
-int		findnewmax(t_ar *ar);
-void	sort(t_ar *ar);
 
-void	push_a(t_ar *ar);
+/*
+** help.c
+*/
+
+int		get_avg(int *a, int size);
+int		get_indexmin(int *b, int size, int max);
+
+void	print(int *a, int size);
 
 #endif

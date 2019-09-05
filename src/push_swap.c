@@ -1,74 +1,78 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pushswap.c                                         :+:      :+:    :+:   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/15 12:39:07 by fsinged           #+#    #+#             */
-/*   Updated: 2019/08/16 12:08:42 by fsinged          ###   ########.fr       */
+/*   Created: 2019/09/03 12:16:08 by fsinged           #+#    #+#             */
+/*   Updated: 2019/09/05 12:25:36 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	maxs_help(t_ar *ar, int count, int max)
-{
-	int i;
+/*
+** Sort for 3 elements
+*/
 
-	i = ar->sizemax;
-	while (count < i)
+static void	small_sort(int *a, int size)
+{
+	if (size == 2 && a[0] > a[1])
+		swap(a, size, 1)
+	while (!(issorted(a, size, 'a')))
 	{
-		ar->max[i] = ar->max[i - 1];
-		i--;
+		if (a[0] > a[1] && a[0] > a[2])
+			rotate(a, size, 1);
+		else if (a[0] > a[1] && a[0] < a[2])
+			swap(a, size, 1);
+		else
+			rrotate(a, size, 1);
 	}
-	ar->max[count] = max;
 }
 
-static void	maxs(t_ar *ar)
-{
-	int	i;
+/*
+** Sort for less elements, then 10 and more then 3
+*/
 
-	i = 0;
-	while (i < ar->sizea)
-	{
-		if (ar->max[0] < ar->a[i])
-			maxs_help(ar, 0, ar->a[i]);
-		else if (ar->max[1] < ar->a[i])
-			maxs_help(ar, 1, ar->a[i]);
-		else if (ar->max[2] < ar->a[i])
-			maxs_help(ar, 2, ar->a[i]);
-		else if (ar->max[3] < ar->a[i])
-			maxs_help(ar, 3, ar->a[i]);
-		else if (ar->max[4] < ar->a[i])
-			maxs_help(ar, 4, ar->a[i]);
-		else if (ar->max[5] < ar->a[i])
-			maxs_help(ar, 5, ar->a[i]);
-		i++;
-	}
+static void	sort(t_ar *ar)
+{
+
+}
+
+/*
+** Sort for more elements, then 10
+*/
+
+static void	big_sort(t_ar *ar, int avg)
+{
+	
 }
 
 static void	push_swap(t_ar *ar)
 {
-	if (ar->sizea > 1)
-	{
-		maxs(ar);
+	if (ar->sizea < 3)
+		small_sort(ar->a, ar->sizea);
+	else if (ar->sizea < 10)
 		sort(ar);
+	else
+	{
+		
+		big_sort(ar, get_avg(ar->a, ar->sizea));
 	}
 }
 
-int			main(int argc, char **argv)
+int 		main(int argc, char **argv)
 {
 	t_ar	*ar;
 
 	if (argc == 1)
 		return (0);
 	ar = init_ar(argc - 1);
-	if (readnumbers(argc - 1, argv + 1, ar->a) != 0)
+	if (readnumbers(argc - 1, argv + 1, ar->a) != 0 && ar->sizea > 1)
 		push_swap(ar);
 	else
 		write(1, "Error\n", 6);
-	print(ar->a, ar->sizea);
 	free_struct(&ar);
 	return (0);
 }

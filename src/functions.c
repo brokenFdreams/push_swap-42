@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 15:24:38 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/03 12:26:36 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/05 12:05:10 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,6 @@ t_ar		*init_ar(int size)
 	ar->a = (int*)malloc(sizeof(int) * size);
 	ar->sizeb = 0;
 	ar->b = (int*)malloc(sizeof(int) * size);
-	ar->max = (int*)malloc(sizeof(int) * (size < 6 ? size : 6));
+	ar->max = (int*)malloc(sizeof(int) * (size < 3 ? size : 3));
 	return (ar);
 }
