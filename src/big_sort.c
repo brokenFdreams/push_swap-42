@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 16:01:34 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/12 13:05:30 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/12 13:56:35 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,8 @@ static void	split_array(t_ar *ar, int avg, int flag, int av)
 		{
 			push_ab(ar, 'b');
 			count--;
-			if (count != 0 && ar->sizeb > 2 &&
-				!((flag == 4 && ar->a[0] > avg) ||
-				(flag != 4 && ar->a[0] <= avg))
-				&& ar->b[0] > av && ++countrotate)
-				rotate_ab(ar, 1);
+			if (count != 0 && sort_help(ar, avg, flag, av) == 1)
+				countrotate++;
 			else if (count != 0 && ar->sizeb > 2 && ar->b[0] > av)
 				rotate(ar->b, ar->sizeb, 2);
 		}

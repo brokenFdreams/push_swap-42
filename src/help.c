@@ -6,11 +6,29 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 11:36:41 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/09 12:33:12 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/12 13:48:38 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	sort_help(t_ar *ar, int avg, int flag, int av)
+{
+	int i;
+
+	i = 0;
+	if (!((flag == 4 && ar->a[0] > avg) || (flag != 4 && ar->a[0] <= avg)) &&
+		ar->sizeb > 2 && ar->b[0] > av && (i = 1))
+		rotate_ab(ar, 1);
+	else if (ar->sizeb > 2 && ar->b[0] > av)
+		rotate(ar->b, ar->sizeb, 2);
+	if (flag != 4 && ar->sizeb > 2 && ar->a[0] > ar->a[1] && ar->a[1] > av &&
+		ar->b[0] > ar->b[1])
+		swap_ab(ar, 1);
+	else if (ar->sizeb > 2 && ar->b[0] > ar->b[1])
+		swap(ar->b, ar->sizeb, 2);
+	return (i);
+}
 
 /*
 ** Get average element

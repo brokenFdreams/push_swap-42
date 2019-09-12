@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 11:47:15 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/11 15:58:23 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/12 13:56:45 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	big_sort(t_ar *ar, int avg);
 ** help.c
 */
 
+int		sort_help(t_ar *ar, int avg, int flag, int av);
 int		get_avg(int *a, int size);
 int		get_min(int *b, int size);
 int		*get_maxs(int *ar, int size, int *max);

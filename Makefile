@@ -6,11 +6,11 @@
 #    By: fsinged <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/07 12:42:32 by fsinged           #+#    #+#              #
-#    Updated: 2019/09/12 13:15:40 by fsinged          ###   ########.fr        #
+#    Updated: 2019/09/12 13:42:13 by fsinged          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-CC = gcc -Wall -Wextra -Werror -g
+CC = gcc -Wall -Wextra -Werror
 PUSH = push_swap
 CHECKER = checker
 
