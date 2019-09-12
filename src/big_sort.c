@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   big_sort.c                                         :+:      :+:    :+:   */
+/*   new_big_sort.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/06 16:01:34 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/12 13:56:35 by fsinged          ###   ########.fr       */
+/*   Created: 2019/09/12 14:50:10 by fsinged           #+#    #+#             */
+/*   Updated: 2019/09/12 16:02:27 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 /*
-** Join array: all elements get back to stack a
-** firstly push all elements and then rotate in stack a
-** Call, if stack b sorted 4 3 2 1
+** return 1 if to max num less steps and 0 if not
 */
 
-static void	join_smart(t_ar *ar)
+static int ismaxormin(int *b, int size)
 {
-	int count;
+	int indexmax;
+	int indexmin;
 
-	count = ar->sizeb;
-	while (ar->sizeb > 0)
-		push_ab(ar, 'a');
-	while (!(issorted(ar->a, ar->sizea, 'a')) && count > 0)
-	{
-		rotate(ar->a, ar->sizea, 1);
-		count--;
-	}
+	indexmax = get_max(b, size);
+	indexmin = get_min(b, size);
+	return (ft_min(indexmax, size - indexmax + 1) <
+			ft_min(indexmin, size - indexmin + 1));
 }
 
 /*
@@ -38,31 +33,35 @@ static void	join_smart(t_ar *ar)
 
 static void	join_array(t_ar *ar)
 {
-	int min;
-	int indexmin;
+	int ra;
+	int index;
+	int flag;
+	int num;
 
+	ra = 0;
 	while (ar->sizeb > 0)
 	{
-		if (issorted(ar->b, ar->sizeb, 'b'))
-		{
-			join_smart(ar);
-			return ;
-		}
-		indexmin = get_min(ar->b, ar->sizeb);
-		min = ar->b[indexmin];
-		if (indexmin != 0 && indexmin > ar->sizeb / 2)
-			while (ar->b[0] != min)
+		flag = ismaxormin(ar->b, ar->sizeb);
+		index = flag ? get_max(ar->b, ar->sizeb) : get_min(ar->b, ar->sizeb);
+		num = ar->b[index];
+		if (index != 0 && index > ar->sizeb / 2)
+			while (ar->b[0] != num)
 				rrotate(ar->b, ar->sizeb, 2);
-		else if (indexmin != 0)
-			while (ar->b[0] != min)
+		else if (index != 0)
+			while (ar->b[0] != num)
 				rotate(ar->b, ar->sizeb, 2);
 		push_ab(ar, 'a');
-		rotate(ar->a, ar->sizea, 1);
+		if (flag)
+			ra++;
+		else
+			rotate(ar->a, ar->sizea, 1);
 	}
+	while (ra-- > 0)
+		rotate(ar->a, ar->sizea, 1);
 }
 
 /*
-** Count all element less/bigger then avg
+** Count all elements less or bigger then avg
 */
 
 static int	count_avg(int *a, int size, int avg, int flag)
@@ -71,40 +70,43 @@ static int	count_avg(int *a, int size, int avg, int flag)
 
 	count = 0;
 	while (--size >= 0)
-		if ((flag == 1 && a[size] <= avg / 2) ||
-			(flag == 4 && a[size] > avg + avg / 2) ||
-			(flag == 2 && a[size] > avg / 2 && a[size] <= avg) ||
-			(flag == 3 && a[size] > avg && a[size] <= avg + avg / 2))
+		if ((flag && a[size] > avg) || (!flag && a[size] <= avg))
 			count++;
 	return (count);
 }
 
 /*
-** Split array on 4 stack: first call split first 25%, then next 25%
+** Split array on 2 stack
 */
 
-static void	split_array(t_ar *ar, int avg, int flag, int av)
+static void	split_array(t_ar *ar, int avg, int flag, int *min)
 {
 	int count;
-	int countrotate;
+	int sorted;
+	int rra;
 
 	count = count_avg(ar->a, ar->sizea, avg, flag);
-	countrotate = 0;
-	avg = flag == 1 ? avg / 2 : avg;
-	avg = flag == 3 ? avg + avg / 2 : avg;
+	sorted = 0;
+	rra = 0;
 	while (count > 0)
-		if ((flag == 4 && ar->a[0] > avg) || (flag != 4 && ar->a[0] <= avg))
+		if (flag && ar->a[0] == min[0] && ++sorted)
 		{
-			push_ab(ar, 'b');
+			rotate(ar->a, ar->sizea, 1);
 			count--;
-			if (count != 0 && sort_help(ar, avg, flag, av) == 1)
-				countrotate++;
-			else if (count != 0 && ar->sizeb > 2 && ar->b[0] > av)
+			min = get_mins(ar->a, ar->sizea - sorted, min);
+		}
+		else if ((!flag && ar->a[0] <= avg && ++rra) ||
+				(flag && ar->a[0] > avg))
+		{
+			count--;
+			push_ab(ar, 'b');
+			if ((!flag && ar->b[0] > avg / 2) ||
+				(flag && ar->b[0] > avg + avg / 2))
 				rotate(ar->b, ar->sizeb, 2);
 		}
-		else if (++countrotate)
+		else
 			rotate(ar->a, ar->sizea, 1);
-	while (flag != 1 && countrotate-- > 0)
+	while (rra-- > 0)
 		rrotate(ar->a, ar->sizea, 1);
 }
 
@@ -114,12 +116,12 @@ static void	split_array(t_ar *ar, int avg, int flag, int av)
 
 void		big_sort(t_ar *ar, int avg)
 {
-	split_array(ar, avg, 1, avg / 4);
+	int *min;
+
+	min = (int*)malloc(sizeof(int) * 3);
+	split_array(ar, avg, 0, min);
 	join_array(ar);
-	split_array(ar, avg, 2, avg / 4 * 3);
+	split_array(ar, avg, 1, get_mins(ar->a, ar->sizea / 2, min));
 	join_array(ar);
-	split_array(ar, avg, 3, avg + avg / 4);
-	join_array(ar);
-	split_array(ar, avg, 4, avg + avg / 4 * 3);
-	join_array(ar);
+	free(min);
 }
