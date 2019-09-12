@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 16:01:34 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/11 15:38:13 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/12 13:05:30 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,16 @@ static void	join_array(t_ar *ar)
 ** Count all element less/bigger then avg
 */
 
-static int	count_avg(int *a, int size, int avg)
+static int	count_avg(int *a, int size, int avg, int flag)
 {
 	int count;
 
 	count = 0;
 	while (--size >= 0)
-		if (a[size] <= avg)
+		if ((flag == 1 && a[size] <= avg / 2) ||
+			(flag == 4 && a[size] > avg + avg / 2) ||
+			(flag == 2 && a[size] > avg / 2 && a[size] <= avg) ||
+			(flag == 3 && a[size] > avg && a[size] <= avg + avg / 2))
 			count++;
 	return (count);
 }
@@ -80,30 +83,32 @@ static int	count_avg(int *a, int size, int avg)
 ** Split array on 4 stack: first call split first 25%, then next 25%
 */
 
-static void	split_array(t_ar *ar, int avg, int flag)
+static void	split_array(t_ar *ar, int avg, int flag, int av)
 {
 	int count;
+	int countrotate;
 
-	count = count_avg(ar->a, ar->sizea, avg);
-	count = flag == 1 ? count : ar->sizea - count;
+	count = count_avg(ar->a, ar->sizea, avg, flag);
+	countrotate = 0;
+	avg = flag == 1 ? avg / 2 : avg;
+	avg = flag == 3 ? avg + avg / 2 : avg;
 	while (count > 0)
-	{
-		if ((flag == 1 && ar->a[0] <= avg) || (flag == 2 && ar->a[0] > avg))
+		if ((flag == 4 && ar->a[0] > avg) || (flag != 4 && ar->a[0] <= avg))
 		{
 			push_ab(ar, 'b');
 			count--;
+			if (count != 0 && ar->sizeb > 2 &&
+				!((flag == 4 && ar->a[0] > avg) ||
+				(flag != 4 && ar->a[0] <= avg))
+				&& ar->b[0] > av && ++countrotate)
+				rotate_ab(ar, 1);
+			else if (count != 0 && ar->sizeb > 2 && ar->b[0] > av)
+				rotate(ar->b, ar->sizeb, 2);
 		}
-		else
+		else if (++countrotate)
 			rotate(ar->a, ar->sizea, 1);
-		if (flag == 1 && ar->b[0] > avg / 3 && ar->a[0] > avg)
-			rotate_ab(ar, 1);
-		if ((ar->sizeb > 2 && flag == 1 && ar->b[0] > avg / 3) ||
-			(ar->sizeb > 2 && flag == 2 && ar->b[0] < avg + avg / 3))
-			rotate(ar->b, ar->sizeb, 2);
-		if (count > 1 && ar->sizeb > 1 && ar->a[0] > ar->a[1] &&
-			ar->b[0] > ar->b[1])
-			swap_ab(ar, 1);
-	}
+	while (flag != 1 && countrotate-- > 0)
+		rrotate(ar->a, ar->sizea, 1);
 }
 
 /*
@@ -112,8 +117,12 @@ static void	split_array(t_ar *ar, int avg, int flag)
 
 void		big_sort(t_ar *ar, int avg)
 {
-	split_array(ar, avg, 1);
+	split_array(ar, avg, 1, avg / 4);
 	join_array(ar);
-	split_array(ar, avg, 2);
+	split_array(ar, avg, 2, avg / 4 * 3);
+	join_array(ar);
+	split_array(ar, avg, 3, avg + avg / 4);
+	join_array(ar);
+	split_array(ar, avg, 4, avg + avg / 4 * 3);
 	join_array(ar);
 }
