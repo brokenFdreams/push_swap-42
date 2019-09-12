@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 13:05:21 by fsinged           #+#    #+#             */
-/*   Updated: 2019/08/15 14:36:03 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/11 16:10:08 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,32 +43,41 @@ static int	check_word(char *line, t_ar *ar)
 
 static int	checker(t_ar *ar)
 {
-	int		fd;
 	char	*line;
+	int		i;
 
-	fd = 0;
-	while (get_next_line(fd, &line))
+	while (get_next_line(0, &line))
 	{
-		if (check_word(line, ar) == 0)
+		if (ft_strcmp(line, "") == 0)
+		{
+			ft_strdel(&line);
 			break ;
+		}
+		i = check_word(line, ar);
 		ft_strdel(&line);
+		if (i == 0)
+			return (0);
 	}
-	return (issorted(ar->a, ar->sizea, 'a') && ar->sizeb == 0);
+	return (issorted(ar->a, ar->sizea, 'a') && ar->sizeb == 0 ? 1 : 0);
 }
 
 int			main(int argc, char **argv)
 {
 	t_ar	*ar;
+	int		i;
 
+	ar = (t_ar*)malloc(sizeof(t_ar));
 	if (argc == 1)
 		return (0);
-	ar = init_ar(argc - 1);
-	if (readnumbers(argc - 1, argv + 1, ar->a) != 0)
+	if (readnumbers(argc - 1, argv + 1, ar))
 	{
-		if (checker(ar) == 0)
+		i = checker(ar);
+		if (i == 0)
 			write(1, "KO\n", 3);
-		else
+		else if (i == 1)
 			write(1, "OK\n", 3);
+		else if (i == 2)
+			write(1, "Error\n", 6);
 	}
 	else
 		write(1, "Error\n", 6);

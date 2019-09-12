@@ -6,7 +6,7 @@
 #    By: fsinged <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/07 12:42:32 by fsinged           #+#    #+#              #
-#    Updated: 2019/09/05 13:44:42 by fsinged          ###   ########.fr        #
+#    Updated: 2019/09/11 15:25:21 by fsinged          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -15,10 +15,9 @@ PUSH = push_swap
 CHECKER = checker
 
 SRCS_PATH = ./src/
-SRCS_FILES = functions.c push.c rotate.c swap.c
+SRCS_FILES = functions.c push.c rotate.c swap.c reader.c
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_FILES))
-SWAP = $(addprefix $(SRCS_PATH), push_swap.c) $(addprefix $(SRCS_PATH), sort.c) \
-	$(addprefix $(SRCS_PATH), help.c) $(addprefix $(SRCS_PATH), big_sort.c)
+SWAP = $(addprefix $(SRCS_PATH), push_swap.c) $(addprefix $(SRCS_PATH), sort.c)		$(addprefix $(SRCS_PATH), help.c) $(addprefix $(SRCS_PATH), big_sort.c)
 CHECK = $(addprefix $(SRCS_PATH), checker.c)
 
 LIB_PATH = ./libft/

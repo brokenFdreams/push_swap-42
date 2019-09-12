@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 11:47:15 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/05 13:51:04 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/11 15:58:23 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ void	rrotate_ab(t_ar *ar, int h);
 */
 
 int		issorted(int *a, int size, char c);
-int		readnumbers(int argc, char **argv, int *a);
 void	free_struct(t_ar **ar);
-t_ar	*init_ar(int size);
+t_ar	*init_ar(t_ar *ar, int size);
 
+int		readnumbers(int argc, char **argv, t_ar *ar); 
 void	small_sort(int *a, int size);
 void	sort(t_ar *ar);
 void	big_sort(t_ar *ar, int avg);

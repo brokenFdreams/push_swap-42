@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 13:09:15 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/05 14:31:12 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/06 14:31:44 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	push_a(t_ar *ar, int *max)
 		{
 			push_ab(ar, 'a');
 			if (flag)
-				swap(ar->a, ar->sizea, 'a');
+				swap(ar->a, ar->sizea, 1);
 			flag = 0;
 			max = get_maxs(ar->b, ar->sizeb, max);
 		}
@@ -47,12 +47,10 @@ static void	push_a(t_ar *ar, int *max)
 static void	push_b(t_ar *ar, int *max)
 {
 	while (ar->sizea > 3)
-	{
 		if (ar->a[0] < max[2])
 			push_ab(ar, 'b');
 		else
 			rotate(ar->a, ar->sizea, 1);
-	}
 }
 
 /*

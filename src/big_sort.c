@@ -5,29 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/05 12:18:02 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/05 15:39:23 by fsinged          ###   ########.fr       */
+/*   Created: 2019/09/06 16:01:34 by fsinged           #+#    #+#             */
+/*   Updated: 2019/09/11 15:38:13 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-/*
-** Count all element less/bigger then avg
-*/
-
-static int	count_avg(int *a, int size, int avg, int flag)
-{
-	int count;
-
-	count = 0;
-	while (--size >= 0)
-		if (flag && a[size] <= avg)
-			count++;
-		else if (!flag && a[size] > avg)
-			count++;
-	return (count);
-}
 
 /*
 ** Join array: all elements get back to stack a
@@ -53,14 +36,14 @@ static void	join_smart(t_ar *ar)
 ** Join array: all elements get back to stack a, first min and rotate it in a
 */
 
-static void	join_array(t_ar *ar, int flag)
+static void	join_array(t_ar *ar)
 {
 	int min;
 	int indexmin;
 
 	while (ar->sizeb > 0)
 	{
-		if (issorted(ar->b, ar->sizeb, 'b') && !flag)
+		if (issorted(ar->b, ar->sizeb, 'b'))
 		{
 			join_smart(ar);
 			return ;
@@ -74,34 +57,52 @@ static void	join_array(t_ar *ar, int flag)
 			while (ar->b[0] != min)
 				rotate(ar->b, ar->sizeb, 2);
 		push_ab(ar, 'a');
-		if (!flag)
-			rotate(ar->a, ar->sizea, 1);
+		rotate(ar->a, ar->sizea, 1);
 	}
 }
 
 /*
-** Split array: all element bigger then avg push to stack b
+** Count all element less/bigger then avg
+*/
+
+static int	count_avg(int *a, int size, int avg)
+{
+	int count;
+
+	count = 0;
+	while (--size >= 0)
+		if (a[size] <= avg)
+			count++;
+	return (count);
+}
+
+/*
+** Split array on 4 stack: first call split first 25%, then next 25%
 */
 
 static void	split_array(t_ar *ar, int avg, int flag)
 {
 	int count;
 
-	count = count_avg(ar->a, ar->sizea, avg, flag);
+	count = count_avg(ar->a, ar->sizea, avg);
+	count = flag == 1 ? count : ar->sizea - count;
 	while (count > 0)
 	{
-		if ((flag && ar->a[0] <= avg) || !flag)
+		if ((flag == 1 && ar->a[0] <= avg) || (flag == 2 && ar->a[0] > avg))
 		{
 			push_ab(ar, 'b');
-			if (count != 0 && flag && ar->b[0] < avg / 2 && ar->a[0] > avg)
-				rotate_ab(ar, 1);
-			else if (count != 0 && ((flag && ar->b[0] < avg / 2) ||
-									(!flag && ar->b[0] > avg + avg / 2)))
-				rotate(ar->b, ar->sizeb, 1);
 			count--;
 		}
-		else if (flag && ar->a[0] > avg)
+		else
 			rotate(ar->a, ar->sizea, 1);
+		if (flag == 1 && ar->b[0] > avg / 3 && ar->a[0] > avg)
+			rotate_ab(ar, 1);
+		if ((ar->sizeb > 2 && flag == 1 && ar->b[0] > avg / 3) ||
+			(ar->sizeb > 2 && flag == 2 && ar->b[0] < avg + avg / 3))
+			rotate(ar->b, ar->sizeb, 2);
+		if (count > 1 && ar->sizeb > 1 && ar->a[0] > ar->a[1] &&
+			ar->b[0] > ar->b[1])
+			swap_ab(ar, 1);
 	}
 }
 
@@ -112,10 +113,7 @@ static void	split_array(t_ar *ar, int avg, int flag)
 void		big_sort(t_ar *ar, int avg)
 {
 	split_array(ar, avg, 1);
-	join_array(ar, issorted(ar->a, ar->sizea, 'a'));
-	if (!(issorted(ar->a, ar->sizea, 'a')))
-	{
-		split_array(ar, avg, 0);
-		join_array(ar, 0);
-	}
+	join_array(ar);
+	split_array(ar, avg, 2);
+	join_array(ar);
 }
