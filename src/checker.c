@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 13:05:21 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/11 16:10:08 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/12 13:17:59 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	checker(t_ar *ar)
 		i = check_word(line, ar);
 		ft_strdel(&line);
 		if (i == 0)
-			return (0);
+			return (2);
 	}
 	return (issorted(ar->a, ar->sizea, 'a') && ar->sizeb == 0 ? 1 : 0);
 }
