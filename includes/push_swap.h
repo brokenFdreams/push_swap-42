@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 11:47:15 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/12 15:50:20 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/13 15:51:33 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,15 @@ int		get_max(int *b, int size);
 int		get_min(int *b, int size);
 int		*get_maxs(int *ar, int size, int *max);
 int		*get_mins(int *ar, int size, int *min);
+
+/*
+** pusher.c
+*/
+
+void	push_b_third(t_ar *ar, int avg);
+void	push_a_second(t_ar *ar, int *min, int *cnt);
+void	push_b_first(t_ar *ar, int avg, int *min, int *cnt);
+void	push_a_first(t_ar *ar, int avg, int *min, int *cnt);
 
 void	print(int *a, int size);
 
