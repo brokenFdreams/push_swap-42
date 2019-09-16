@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:45:27 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/16 12:14:39 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/16 13:46:15 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** Count all elements less or bigger then avg
 */
 
-static int	count_avg(int *a, int size, int avg, int flag)
+int			count_avg(int *a, int size, int avg, int flag)
 {
 	int count;
 
@@ -29,67 +29,6 @@ static int	count_avg(int *a, int size, int avg, int flag)
 }
 
 /*
-** Push all elements > avg + avg / 2 to stack b
-** all element bigger we rotate to the and of a
-** If we got minimum, then we're rotate it to the end of stack a
-** if we didn't rotate anything else
-*/
-
-void		push_b_third(t_ar *ar, int avg)
-{
-	int count;
-	int rra;
-	int max;
-
-	rra = 0;
-	count = count_avg(ar->a, ar->sizea, avg, 2);
-	while (count > 0)
-		if (ar->a[0] > avg && ar->a[0] <= avg + avg / 2 && count--)
-			push_ab(ar, 'b');
-		else if (++rra)
-			rotate(ar->a, ar->sizea, 1);
-	max = ar->b[get_max(ar->b, ar->sizeb)];
-	while (rra-- > 0)
-		if (ar->b[0] != max)
-			rrotate_ab(ar, 1);
-		else
-			rrotate(ar->a, ar->sizea, 1);
-}
-
-/*
-** Push b all elememnts <= avg
-** Then we're push back all elemts is bigger then avg / 2
-** if we got minimum, then we're push it to a and rotate
-*/
-
-void		push_b_first(t_ar *ar, int avg, int *min, int *cnt)
-{
-	int count;
-
-	count = count_avg(ar->a, ar->sizea, avg, 0);
-	while (count > 0)
-		if (ar->a[0] <= avg && count--)
-			push_ab(ar, 'b');
-		else
-			rotate(ar->a, ar->sizea, 1);
-	count = count_avg(ar->b, ar->sizeb, avg / 2, 1);
-	while (count > 0)
-		if (ar->b[0] > avg / 2 && count--)
-			push_ab(ar, 'a');
-		else if (ar->b[0] == min[0] && ++(*cnt))
-		{
-			push_ab(ar, 'a');
-			if (ar->b[0] <= avg / 2)
-				rotate_ab(ar, 1);
-			else
-				rotate(ar->a, ar->sizea, 1);
-			min = get_mins(ar->b, ar->sizeb, min);
-		}
-		else
-			rotate(ar->b, ar->sizeb, 2);
-}
-
-/*
 ** push a all elements in stack b
 ** if last element of stack b is minimum
 ** then we're push it to a and rotate it
@@ -97,7 +36,7 @@ void		push_b_first(t_ar *ar, int avg, int *min, int *cnt)
 ** then we're push it to top of stack a
 */
 
-void		push_a_second(t_ar *ar, int *min, int *cnt)
+static void	push_a_second(t_ar *ar, int *min, int *cnt)
 {
 	int index;
 	int max;
@@ -126,28 +65,52 @@ void		push_a_second(t_ar *ar, int *min, int *cnt)
 		rotate(ar->a, ar->sizea, 1);
 }
 
+static void	push_a_recursive(t_ar *ar, int *min, int *cnt)
+{
+	if (ar->sizeb > 12)
+		push_a_first(ar, get_avg(ar->b, ar->sizeb), min ,cnt);
+	else
+		push_a_second(ar, min, cnt);
+}
+
+static void	push_a_help(t_ar *ar, int *min, int *cnt, int ret)
+{
+	while (ret-- > 0)
+		if (min[0] == ar->a[0] && min[0] < get_min(ar->b, ar->sizeb))
+		{
+			rotate(ar->a, ar->sizea, 1);
+			++(*cnt);
+			min = get_mins(ar->a, ar->sizea - *cnt, min);
+		}
+		else
+			push_ab(ar, 'b');
+}
+
 void		push_a_first(t_ar *ar, int avg, int *min, int *cnt)
 {
 	int count;
 	int ret;
 
-	count = count_avg(ar->b, ar->sizeb, avg, 1);
-	ret = count;
-	while (count > 0)
-		if (ar->b[0] > avg && count--)
+	ret = 0;
+	while ((count = count_avg(ar->b, ar->sizeb, avg, 1)) > 12)
+	{
+		while (count > 0)
+			if (ar->b[0] > avg && count-- && ++ret)
 				push_ab(ar, 'a');
-		else if (ar->b[0] == min[0] && ++(*cnt))
-		{
-			push_ab(ar, 'a');
-			if (ar->b[0] <= avg)
-				rotate_ab(ar, 1);
+			else if (ar->b[0] == min[0] && ++(*cnt))
+			{
+				push_ab(ar, 'a');
+				if (ar->b[0] <= avg)
+					rotate_ab(ar, 1);
+				else
+					rotate(ar->a, ar->sizea, 1);
+				min = get_mins(ar->b, ar->sizeb, min);
+			}
 			else
-				rotate(ar->a, ar->sizea, 1);
-			min = get_mins(ar->b, ar->sizeb, min);
-		}
-		else
-			rotate(ar->b, ar->sizeb, 2);
+				rotate(ar->b, ar->sizeb, 2);
+		avg = get_avg(ar->b, ar->sizeb);
+	}
 	push_a_second(ar, get_mins(ar->b, ar->sizeb, min), cnt);
-	while (ret-- > 0)
-		push_ab(ar, 'b');
+	push_a_help(ar, get_mins(ar->a, ar->sizea - *cnt, min), cnt, ret);
+	push_a_recursive(ar, get_mins(ar->b, ar->sizeb, min), cnt);
 }
