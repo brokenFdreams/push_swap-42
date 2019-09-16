@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:45:27 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/16 13:46:15 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/16 13:47:58 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	push_a_second(t_ar *ar, int *min, int *cnt)
 static void	push_a_recursive(t_ar *ar, int *min, int *cnt)
 {
 	if (ar->sizeb > 12)
-		push_a_first(ar, get_avg(ar->b, ar->sizeb), min ,cnt);
+		push_a_first(ar, get_avg(ar->b, ar->sizeb), min, cnt);
 	else
 		push_a_second(ar, min, cnt);
 }

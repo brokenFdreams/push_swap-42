@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 11:59:18 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/11 16:03:42 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/16 13:52:46 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ static int	isint(char *str)
 	sign = *str == '-' ? -1 : 1;
 	if (*str == '-' || *str == '+')
 		str++;
+	if (!ft_isdigit(*str))
+		return (0);
 	while (*str)
 	{
 		if (!ft_isdigit(*str))
