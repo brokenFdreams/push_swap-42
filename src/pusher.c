@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:45:27 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/16 13:47:58 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/16 15:18:23 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,12 @@ void		push_a_first(t_ar *ar, int avg, int *min, int *cnt)
 {
 	int count;
 	int ret;
+	int flag;
 
 	ret = 0;
-	while ((count = count_avg(ar->b, ar->sizeb, avg, 1)) > 12)
+	flag = (ar->sizea + ar->sizeb) > 200;
+	while (((count = count_avg(ar->b, ar->sizeb, avg, 1)) > 7 && !flag) ||
+		   (count > 18 && flag))
 	{
 		while (count > 0)
 			if (ar->b[0] > avg && count-- && ++ret)

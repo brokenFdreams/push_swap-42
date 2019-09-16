@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 11:59:18 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/16 13:52:46 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/16 15:12:16 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,14 +109,17 @@ int			readnumbers(int argc, char **argv, t_ar *ar)
 		argv = ft_strsplit(argv[0], ' ');
 		flag = 1;
 	}
-	i = 0;
+	i = -1;
 	ar = init_ar(ar, argc);
-	while (i < argc)
+	while (++i < argc)
 	{
 		ar->a[i] = ft_atoi(argv[i]);
 		if (!isint(argv[i]) || !isduplicate(ar->a, i))
+		{
+			if (flag)
+				ft_strddel(argv);
 			return (0);
-		i++;
+		}
 	}
 	if (flag)
 		ft_strddel(argv);

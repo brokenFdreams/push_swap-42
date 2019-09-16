@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 13:05:21 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/12 13:17:59 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/16 14:59:52 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ int			main(int argc, char **argv)
 	t_ar	*ar;
 	int		i;
 
-	ar = (t_ar*)malloc(sizeof(t_ar));
 	if (argc == 1)
 		return (0);
+	ar = (t_ar*)malloc(sizeof(t_ar));
 	if (readnumbers(argc - 1, argv + 1, ar))
 	{
 		i = checker(ar);
