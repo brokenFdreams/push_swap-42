@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:45:27 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/16 15:18:23 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/18 14:39:14 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,12 @@ static void	push_a_second(t_ar *ar, int *min, int *cnt)
 		rotate(ar->a, ar->sizea, 1);
 }
 
-static void	push_a_recursive(t_ar *ar, int *min, int *cnt)
+static void	push_a_recursive(t_ar *ar, int *min, int *cnt, int flag)
 {
-	if (ar->sizeb > 12)
+	int count;
+
+	count = count_avg(ar->b, ar->sizeb, get_avg(ar->b, ar->sizeb), 1);
+	if ((flag && count > 8) || (flag && count > 18))
 		push_a_first(ar, get_avg(ar->b, ar->sizeb), min, cnt);
 	else
 		push_a_second(ar, min, cnt);
@@ -94,7 +97,7 @@ void		push_a_first(t_ar *ar, int avg, int *min, int *cnt)
 
 	ret = 0;
 	flag = (ar->sizea + ar->sizeb) > 200;
-	while (((count = count_avg(ar->b, ar->sizeb, avg, 1)) > 7 && !flag) ||
+	while (((count = count_avg(ar->b, ar->sizeb, avg, 1)) > 8 && !flag) ||
 		   (count > 18 && flag))
 	{
 		while (count > 0)
@@ -115,5 +118,5 @@ void		push_a_first(t_ar *ar, int avg, int *min, int *cnt)
 	}
 	push_a_second(ar, get_mins(ar->b, ar->sizeb, min), cnt);
 	push_a_help(ar, get_mins(ar->a, ar->sizea - *cnt, min), cnt, ret);
-	push_a_recursive(ar, get_mins(ar->b, ar->sizeb, min), cnt);
+	push_a_recursive(ar, get_mins(ar->b, ar->sizeb, min), cnt, flag);
 }
