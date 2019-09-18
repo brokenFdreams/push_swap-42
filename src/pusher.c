@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:45:27 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/18 14:39:14 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/18 14:53:33 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,8 @@ void		push_a_first(t_ar *ar, int avg, int *min, int *cnt)
 	ret = 0;
 	flag = (ar->sizea + ar->sizeb) > 200;
 	while (((count = count_avg(ar->b, ar->sizeb, avg, 1)) > 8 && !flag) ||
-		   (count > 18 && flag))
-	{
-		while (count > 0)
+			(count > 18 && flag))
+		while ((avg = count > 0 ? avg : get_avg(ar->b, ar->sizeb)) && count > 0)
 			if (ar->b[0] > avg && count-- && ++ret)
 				push_ab(ar, 'a');
 			else if (ar->b[0] == min[0] && ++(*cnt))
@@ -114,8 +113,6 @@ void		push_a_first(t_ar *ar, int avg, int *min, int *cnt)
 			}
 			else
 				rotate(ar->b, ar->sizeb, 2);
-		avg = get_avg(ar->b, ar->sizeb);
-	}
 	push_a_second(ar, get_mins(ar->b, ar->sizeb, min), cnt);
 	push_a_help(ar, get_mins(ar->a, ar->sizea - *cnt, min), cnt, ret);
 	push_a_recursive(ar, get_mins(ar->b, ar->sizeb, min), cnt, flag);
