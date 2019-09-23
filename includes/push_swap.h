@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 11:47:15 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/16 13:39:23 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/19 15:03:48 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 # define PUSH_SWAP_H
 
 # include "libft.h"
-# include <stdlib.h>
-
-# include <stdio.h>
 
 typedef struct	s_ar
 {
