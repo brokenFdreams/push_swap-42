@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:45:27 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/18 14:53:33 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/23 14:30:22 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static void	push_a_recursive(t_ar *ar, int *min, int *cnt, int flag)
 static void	push_a_help(t_ar *ar, int *min, int *cnt, int ret)
 {
 	while (ret-- > 0)
-		if (min[0] == ar->a[0] && min[0] < get_min(ar->b, ar->sizeb))
+		if (min[0] == ar->a[0] && min[0] < ar->b[get_min(ar->b, ar->sizeb)])
 		{
 			rotate(ar->a, ar->sizea, 1);
 			++(*cnt);
