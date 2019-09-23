@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:45:27 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/23 14:30:22 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/23 15:35:42 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	push_a_recursive(t_ar *ar, int *min, int *cnt, int flag)
 	int count;
 
 	count = count_avg(ar->b, ar->sizeb, get_avg(ar->b, ar->sizeb), 1);
-	if ((flag && count > 8) || (flag && count > 18))
+	if ((flag && count > 9) || (flag && count > 17))
 		push_a_first(ar, get_avg(ar->b, ar->sizeb), min, cnt);
 	else
 		push_a_second(ar, min, cnt);
@@ -97,8 +97,8 @@ void		push_a_first(t_ar *ar, int avg, int *min, int *cnt)
 
 	ret = 0;
 	flag = (ar->sizea + ar->sizeb) > 200;
-	while (((count = count_avg(ar->b, ar->sizeb, avg, 1)) > 8 && !flag) ||
-			(count > 18 && flag))
+	while (((count = count_avg(ar->b, ar->sizeb, avg, 1)) > 9 && !flag) ||
+			(count > 17 && flag))
 		while ((avg = count > 0 ? avg : get_avg(ar->b, ar->sizeb)) && count > 0)
 			if (ar->b[0] > avg && count-- && ++ret)
 				push_ab(ar, 'a');
