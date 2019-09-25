@@ -6,26 +6,11 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 15:24:38 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/24 11:42:40 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/25 13:50:05 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
-
-void		print(int *a, int size, char *str)
-{
-	int i;
-
-	i = -1;
-	printf("%s", str);
-	printf("size=%d\n", size);
-	while (++i < size)
-		if (i + 1 == size)
-			printf("%d\n", a[i]);
-		else
-			printf("%d ", a[i]);
-}
 
 /*
 ** Check, sorted array or not

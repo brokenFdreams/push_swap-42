@@ -6,12 +6,11 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 14:50:10 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/25 13:43:50 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/25 13:50:16 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 /*
 ** Push all elements > avg + avg / 2 to stack b
@@ -125,46 +124,22 @@ void		big_sort(t_ar *ar, int avg)
 	cnt = 0;
 	min = (int*)malloc(sizeof(int) * 3);
 	push_b_first(ar, avg, get_mins(ar->a, ar->sizea, min), &cnt);
-//	print(ar->a, ar->sizea, "pb1AAAAAAAAAAA");
-//	print(ar->b, ar->sizeb, "pb1BBBBBBBBBBB");
 	push_a_first(ar, get_avg(ar->b, ar->sizeb),
 				get_mins(ar->b, ar->sizeb, min), &cnt);
-//	print(ar->a, ar->sizea, "pa1AAAAAAAAAAA");
-//	print(ar->b, ar->sizeb, "pa1BBBBBBBBBBB");
 	push_b_second(ar, avg, 1);
-//	print(ar->a, ar->sizea, "pb2AAAAAAAAAAA");
-//	print(ar->b, ar->sizeb, "pb2BBBBBBBBBBB");
 	push_a_first(ar, get_avg(ar->b, ar->sizeb),
 				get_mins(ar->b, ar->sizeb, min), &cnt);
-//	print(ar->a, ar->sizea, "pa2AAAAAAAAAAA");
-//	print(ar->b, ar->sizeb, "pa2BBBBBBBBBBB");
 	push_b_fourth(ar, avg, 1);
-//	print(ar->a, ar->sizea, "pb3AAAAAAAAAAA");
-//	print(ar->b, ar->sizeb, "pb3BBBBBBBBBBB");
 	push_a_first(ar, get_avg(ar->b, ar->sizeb),
 				get_mins(ar->b, ar->sizeb, min), &cnt);
-//	print(ar->a, ar->sizea, "pa3AAAAAAAAAAA");
-//	print(ar->b, ar->sizeb, "pa3BBBBBBBBBBB");
 	push_b_third(ar, avg);
-//	print(ar->a, ar->sizea, "pb4AAAAAAAAAAA");
-//	print(ar->b, ar->sizeb, "pb4BBBBBBBBBBB");
 	push_a_first(ar, get_avg(ar->b, ar->sizeb),
 				get_mins(ar->b, ar->sizeb, min), &cnt);
-//	print(ar->a, ar->sizea, "pa4AAAAAAAAAAA");
-//	print(ar->b, ar->sizeb, "pa4BBBBBBBBBBB");
 	push_b_second(ar, avg, 0);
-//	print(ar->a, ar->sizea, "pb5AAAAAAAAAAA");
-//	print(ar->b, ar->sizeb, "pb5BBBBBBBBBBB");
-	push_a_first(ar, get_avg(ar->b, ar->sizeb),
-				 get_mins(ar->b, ar->sizeb, min), &cnt);
-//	print(ar->a, ar->sizea, "pa5AAAAAAAAAAA");
-//	print(ar->b, ar->sizeb, "pa5BBBBBBBBBBB");
-	push_b_fourth(ar, avg, 0);
-//	print(ar->a, ar->sizea, "pb6AAAAAAAAAAA");
-//	print(ar->b, ar->sizeb, "pb6BBBBBBBBBBB");
 	push_a_first(ar, get_avg(ar->b, ar->sizeb),
 				get_mins(ar->b, ar->sizeb, min), &cnt);
-//	print(ar->a, ar->sizea, "pa6AAAAAAAAAAA");
-//	print(ar->b, ar->sizeb, "pa6BBBBBBBBBBB");
+	push_b_fourth(ar, avg, 0);
+	push_a_first(ar, get_avg(ar->b, ar->sizeb),
+				get_mins(ar->b, ar->sizeb, min), &cnt);
 	free(min);
 }
