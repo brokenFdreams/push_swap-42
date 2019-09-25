@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 11:47:15 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/23 14:30:43 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/24 11:38:12 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,7 @@ int				*get_mins(int *ar, int size, int *min);
 
 int				count_avg(int *a, int size, int avg, int flag);
 void			push_a_first(t_ar *ar, int avg, int *min, int *cnt);
+
+void			print(int *a, int size, char *str);
 
 #endif

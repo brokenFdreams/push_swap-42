@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:45:27 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/23 15:35:42 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/25 13:42:58 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@
 int			count_avg(int *a, int size, int avg, int flag)
 {
 	int count;
+	int av;
 
 	count = 0;
+	av = avg > 0 ? avg + avg / 2 : avg - avg / 2;
 	while (--size >= 0)
 		if ((flag == 0 && a[size] <= avg) || (flag == 1 && a[size] > avg) ||
-			(flag == 2 && a[size] > avg && a[size] <= avg + avg / 2))
+			(flag == 2 && a[size] > avg && a[size] <= av))
 			count++;
 	return (count);
 }

@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 11:36:41 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/12 15:55:25 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/24 12:08:04 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	get_avg(int *a, int size)
 	count = 0;
 	while (i < size)
 		count += a[i++];
-	return ((int)(count / size + 0.5));
+	return ((int)(count / size - 0.5));
 }
 
 int	get_max(int *b, int size)
