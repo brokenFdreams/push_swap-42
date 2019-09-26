@@ -6,11 +6,41 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 13:05:21 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/25 12:06:30 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/26 15:04:34 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static void	print(int num)
+{
+	write(1, "\t[", 3);
+	ft_putnbr(num);
+	write(1, "]\t", 3);
+}
+
+static void	ft_print(t_ar *ar)
+{
+	int sa;
+	int size;
+
+	sa = -1;
+	usleep(110000);
+	system("clear");
+	size = ar->sizea + ar->sizeb;
+	while (++sa < size)
+	{
+		if (sa < ar->sizea)
+			print(ar->a[sa]);
+		else
+			write(1, "\t[ ]\t", 5);
+		if (sa < ar->sizeb)
+			print(ar->b[sa]);
+		else
+			write(1, "\t[ ]\t", 5);
+		write(1, "\n", 1);
+	}
+}
 
 static int	check_word(char *line, t_ar *ar)
 {
@@ -41,7 +71,7 @@ static int	check_word(char *line, t_ar *ar)
 	return (1);
 }
 
-static int	checker(t_ar *ar)
+static int	checker(t_ar *ar, int flag)
 {
 	char	*line;
 	int		i;
@@ -54,6 +84,8 @@ static int	checker(t_ar *ar)
 			break ;
 		}
 		i = check_word(line, ar);
+		if (flag)
+			ft_print(ar);
 		ft_strdel(&line);
 		if (i == 0)
 			return (2);
@@ -65,13 +97,18 @@ int			main(int argc, char **argv)
 {
 	t_ar	*ar;
 	int		i;
+	int		flag;
 
 	if (argc == 1)
 		return (0);
+	flag = 0;
 	ar = (t_ar*)malloc(sizeof(t_ar));
+	if (ft_strequ(argv[1], "-v") && argv++ && argc--)
+		flag = 1;
 	if (readnumbers(argc - 1, argv + 1, ar))
 	{
-		i = checker(ar);
+		ft_putnbr(ar->sizeb);
+		i = checker(ar, flag);
 		if (i == 0)
 			write(1, "KO\n", 3);
 		else if (i == 1)
