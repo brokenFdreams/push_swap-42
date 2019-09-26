@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 14:50:10 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/25 13:50:16 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/26 13:15:28 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,13 @@
 ** if we didn't rotate anything else
 */
 
-static void	push_b_third(t_ar *ar, int avg)
+static void	push_b_third(t_ar *ar, int av, int avg)
 {
 	int count;
 	int rra;
 	int max;
-	int av;
 
 	rra = 0;
-	av = avg > 0 ? avg + avg / 2 : avg - avg / 2;
 	count = count_avg(ar->a, ar->sizea, avg, 2);
 	while (count > 0)
 		if (ar->a[0] > avg && ar->a[0] <= av && count--)
@@ -88,17 +86,12 @@ static void	push_b_fourth(t_ar *ar, int avg, int flag)
 ** if we got minimum, then we're rotate it to end of stack a
 */
 
-static void	push_b_second(t_ar *ar, int avg, int flag)
+static void	push_b_second(t_ar *ar, int av, int avg, int flag)
 {
 	int count;
 	int max;
-	int av;
 
 	count = 0;
-	if (flag)
-		av = avg > 0 ? avg / 4 * 3 : avg + avg / 4;
-	else
-		av = avg > 0 ? avg + avg / 4 * 3 : avg / 4;
 	while ((flag && ar->a[0] <= avg) || (!flag && ar->a[0] > avg))
 		if (ar->a[0] > av && ++count)
 			rotate(ar->a, ar->sizea, 1);
@@ -126,16 +119,16 @@ void		big_sort(t_ar *ar, int avg)
 	push_b_first(ar, avg, get_mins(ar->a, ar->sizea, min), &cnt);
 	push_a_first(ar, get_avg(ar->b, ar->sizeb),
 				get_mins(ar->b, ar->sizeb, min), &cnt);
-	push_b_second(ar, avg, 1);
+	push_b_second(ar, get_avg2(ar->a, ar->sizea - cnt, avg, 0), avg, 1);
 	push_a_first(ar, get_avg(ar->b, ar->sizeb),
 				get_mins(ar->b, ar->sizeb, min), &cnt);
 	push_b_fourth(ar, avg, 1);
 	push_a_first(ar, get_avg(ar->b, ar->sizeb),
 				get_mins(ar->b, ar->sizeb, min), &cnt);
-	push_b_third(ar, avg);
+	push_b_third(ar, get_avg2(ar->a, ar->sizea - cnt, avg, 1), avg);
 	push_a_first(ar, get_avg(ar->b, ar->sizeb),
 				get_mins(ar->b, ar->sizeb, min), &cnt);
-	push_b_second(ar, avg, 0);
+	push_b_second(ar, get_avg2(ar->a, ar->sizea - cnt, avg, 2), avg, 0);
 	push_a_first(ar, get_avg(ar->b, ar->sizeb),
 				get_mins(ar->b, ar->sizeb, min), &cnt);
 	push_b_fourth(ar, avg, 0);
