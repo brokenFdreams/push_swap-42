@@ -6,7 +6,7 @@
 /*   By: fsinged <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 14:50:10 by fsinged           #+#    #+#             */
-/*   Updated: 2019/09/26 13:15:28 by fsinged          ###   ########.fr       */
+/*   Updated: 2019/09/27 16:10:12 by fsinged          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	push_b_first(t_ar *ar, int avg, int *min, int *cnt)
 			push_ab(ar, 'b');
 		else
 			rotate(ar->a, ar->sizea, 1);
-	av = avg > 0 ? avg / 2 : avg + avg / 2;
+	av = get_avg(ar->b, ar->sizeb);
 	count = count_avg(ar->b, ar->sizeb, av, 1);
 	while (count > 0)
 		if (ar->b[0] > av && count--)
