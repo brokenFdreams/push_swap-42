@@ -1,5 +1,4 @@
 # push_swap-42
-125/125 Sort algorithm with limited commands
 The goal of this project is sort array of numbers using two stacks and followind rules below:
   sa : swap a - swap the first 2 elements at the top of stack a. Do nothing if there
     is only one or no elements).
