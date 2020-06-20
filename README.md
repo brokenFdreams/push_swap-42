@@ -16,3 +16,5 @@ The goal of this project is sort array of numbers using two stacks and followind
   rr : ra and rb at the same time.
   rra : reverse rotate a - shift down all elements of stack a by 1. The last element
     becomes the first one.
+
+run: ARG=`ruby -e "puts (1..50).to_a.shuffle.join(' ')"`; ./push_swap $ARG | ./checker -vcat $ARG
